@@ -1,0 +1,9 @@
+#!/bin/sh
+
+echo "Running lint..."
+yarn lint
+
+echo "Staging fixes..."
+git add -A
+
+# chmod +x .hooks/pre-commit
