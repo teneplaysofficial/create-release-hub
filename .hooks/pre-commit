@@ -4,6 +4,6 @@ echo "Running lint..."
 yarn lint
 
 echo "Staging fixes..."
-git add -A
+git add --update
 
 # chmod +x .hooks/pre-commit
