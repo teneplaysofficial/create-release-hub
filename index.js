@@ -98,7 +98,7 @@ async function hasConfig() {
 		s.stop(`'release-hub' field not found in package.json`)
 		return false
 	} catch {
-		log.error("package.json not found or unreadable")
+		s.stop("package.json not found or unreadable")
 		return false
 	}
 }
@@ -106,7 +106,14 @@ async function hasConfig() {
 async function hasLib() {
 	s.start(`Checking whether ${NAME} is installed`)
 
-	const pkg = JSON.parse(await readFile(PACKAGE, "utf-8"))
+	let pkg
+	try {
+		pkg = JSON.parse(await readFile(PACKAGE, "utf-8"))
+	} catch {
+		s.stop("package.json not found or unreadable")
+		return false
+	}
+
 	const installed = Boolean(
 		pkg?.dependencies?.[NAME] || pkg?.devDependencies?.[NAME],
 	)
@@ -264,7 +271,7 @@ try {
 
 			exitOnCancel(group)
 
-			if (group.size < 2) {
+			if (!group || group.size < 2) {
 				log.error("A sync group must contain at least 2 targets.")
 				continue
 			}
