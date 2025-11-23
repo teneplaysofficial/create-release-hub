@@ -183,6 +183,7 @@ try {
 
 	log.info("Configuring Release Hub")
 
+	/** @type {import("@clack/prompts").SelectOptions["options"]} */
 	const options = [
 		{ value: "node", label: "Node (package.json)" },
 		{ value: "jsr", label: "JSR (jsr.json)" },
