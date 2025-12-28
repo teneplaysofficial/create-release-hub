@@ -1,0 +1,14 @@
+minimum_pre_commit_version: "3.6.0"
+
+repos:
+  - repo: https://github.com/biomejs/pre-commit
+    rev: v2.3.10
+    hooks:
+      - id: biome-check
+        files: \.(js|ts|json)$
+
+  - repo: https://github.com/rbubley/mirrors-prettier
+    rev: v3.7.4
+    hooks:
+      - id: prettier
+        types_or: [yaml, markdown]
